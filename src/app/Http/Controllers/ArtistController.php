@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ArtistRequest;
+use App\Http\Resources\ArtistResource;
+use App\Models\Artist;
 
 class ArtistController extends Controller
 {
@@ -11,38 +13,45 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        //
+        $artists = Artist::all();
+        return ArtistResource::collection($artists);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArtistRequest $request)
     {
-        //
+        $artist = Artist::create($request->validated());
+
+        return new ArtistResource($artist);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Artist $artist)
     {
-        //
+        return new ArtistResource($artist);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ArtistRequest $request, Artist $artist)
     {
-        //
+        $artist->update($request->validated());
+
+        return new ArtistResource($artist);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Artist $artist)
     {
-        //
+        $artist->delete();
+
+        return response()->json(null, 204);
     }
 }
