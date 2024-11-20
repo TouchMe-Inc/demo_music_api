@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Album;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ArtistSeeder::class,
             SongSeeder::class,
+            AlbumSeeder::class
         ]);
     }
 }
