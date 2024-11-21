@@ -4,6 +4,19 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="AlbumRequest",
+ *     type="object",
+ *     title="AlbumRequest",
+ *     required={"title", "artist_id", "release_year"},
+ *     properties={
+ *         @OA\Property(property="title", type="string", example="Rapgod"),
+ *         @OA\Property(property="artist_id", type="integer", example="1"),
+ *         @OA\Property(property="release_year", type="integer", example="2007"),
+ *     }
+ * )
+ */
 class AlbumRequest extends FormRequest
 {
     /**

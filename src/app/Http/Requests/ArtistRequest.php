@@ -4,6 +4,17 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="ArtistRequest",
+ *     type="object",
+ *     title="ArtistRequest",
+ *     required={"name"},
+ *     properties={
+ *         @OA\Property(property="name", type="string", example="Eminem"),
+ *     }
+ * )
+ */
 class ArtistRequest extends FormRequest
 {
     /**

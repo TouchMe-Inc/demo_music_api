@@ -1,0 +1,650 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/albums": {
+            "get": {
+                "tags": [
+                    "Album"
+                ],
+                "summary": "Display all albums",
+                "operationId": "735609843dcfb89ee4e12e340eddca25",
+                "responses": {
+                    "200": {
+                        "description": "All albums are shown",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Album"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Album"
+                ],
+                "summary": "Add album",
+                "operationId": "2252aa8fd63b7d2fa1203c1735943d46",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AlbumRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The album has been added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Album"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/albums/{album}": {
+            "get": {
+                "tags": [
+                    "Album"
+                ],
+                "summary": "Get album",
+                "operationId": "1438c74c20588b81ffcdbc54e9b5258e",
+                "parameters": [
+                    {
+                        "name": "album",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The album was shown",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Album"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Album"
+                ],
+                "summary": "Update album",
+                "operationId": "0c94feaa993026ec58a585ef8ded6778",
+                "parameters": [
+                    {
+                        "name": "album",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AlbumRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The artist has been updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Album"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Album"
+                ],
+                "summary": "Remove album",
+                "operationId": "1ea877ac4c6df523f3c957cf161bc142",
+                "parameters": [
+                    {
+                        "name": "album",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The artist has been removed"
+                    }
+                }
+            }
+        },
+        "/api/albums/{album}/songs": {
+            "get": {
+                "tags": [
+                    "AlbumSong"
+                ],
+                "summary": "Display album songs",
+                "operationId": "4bfc954afef493a8e4225295cca0d03a",
+                "parameters": [
+                    {
+                        "name": "album",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All album songs are shown"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AlbumSong"
+                ],
+                "summary": "Add song to album",
+                "operationId": "48ae422672a44fbc2da68e7c3b07f0ae",
+                "parameters": [
+                    {
+                        "name": "album",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AlbumSongRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Song added to album successfully"
+                    }
+                }
+            }
+        },
+        "/api/albums/{album}/songs/{song}": {
+            "delete": {
+                "tags": [
+                    "AlbumSong"
+                ],
+                "summary": "Remove song from album",
+                "operationId": "950426a912db2383f8d68ce10762162f",
+                "parameters": [
+                    {
+                        "name": "album",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "song",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Song removed from album successfully"
+                    }
+                }
+            }
+        },
+        "/api/artists": {
+            "get": {
+                "tags": [
+                    "Artist"
+                ],
+                "summary": "Display all artists",
+                "operationId": "2c8aed1387cca1c65d98da7ee11ac926",
+                "responses": {
+                    "200": {
+                        "description": "All artists are shown"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Artist"
+                ],
+                "summary": "Add artist",
+                "operationId": "83d2888bdc6fac66b9a7cc81c4c950fb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ArtistRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The artist has been added"
+                    }
+                }
+            }
+        },
+        "/artists/{artist}": {
+            "get": {
+                "tags": [
+                    "Artist"
+                ],
+                "summary": "Get artist",
+                "operationId": "07069ba9c0529b72933618e6f1f7fa68",
+                "parameters": [
+                    {
+                        "name": "artist",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The artist was shown"
+                    }
+                }
+            }
+        },
+        "/api/artists/{artist}": {
+            "put": {
+                "tags": [
+                    "Artist"
+                ],
+                "summary": "Update artist",
+                "operationId": "2c50386edfbe20e5ee960978413e798a",
+                "parameters": [
+                    {
+                        "name": "artist",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ArtistRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The artist has been updated"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Artist"
+                ],
+                "summary": "Remove artist",
+                "operationId": "bc9bb2b0855c30ff92c246492e87d442",
+                "parameters": [
+                    {
+                        "name": "artist",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The artist has been removed"
+                    }
+                }
+            }
+        },
+        "/api/songs": {
+            "get": {
+                "tags": [
+                    "Song"
+                ],
+                "summary": "Display all songs",
+                "operationId": "0388bb28c35eec49b8b492d169ce3575",
+                "responses": {
+                    "200": {
+                        "description": "All songs are shown"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Song"
+                ],
+                "summary": "Add new song",
+                "operationId": "2f1970b82d91cc715578d972189f19cb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SongRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The song has been added"
+                    }
+                }
+            }
+        },
+        "/api/songs/{song}": {
+            "get": {
+                "tags": [
+                    "Song"
+                ],
+                "summary": "Get song",
+                "operationId": "5584b4a5efb6ac07427f6347ba81bfb9",
+                "parameters": [
+                    {
+                        "name": "song",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The song was shown",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Song"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Song not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Song"
+                ],
+                "summary": "Update song",
+                "operationId": "0b07a265b5882a791e043120dd820175",
+                "parameters": [
+                    {
+                        "name": "song",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SongRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The song has been updated"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Song"
+                ],
+                "summary": "Remove song",
+                "operationId": "f45a69621f450a8e3ab4f9b197a56f4d",
+                "parameters": [
+                    {
+                        "name": "song",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The song has been removed"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AlbumRequest": {
+                "title": "AlbumRequest",
+                "required": [
+                    "title",
+                    "artist_id",
+                    "release_year"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Rapgod"
+                    },
+                    "artist_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "release_year": {
+                        "type": "integer",
+                        "example": "2007"
+                    }
+                },
+                "type": "object"
+            },
+            "AlbumSongRequest": {
+                "title": "AlbumSongRequest",
+                "required": [
+                    "song_id",
+                    "track_number"
+                ],
+                "properties": {
+                    "song_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "track_number": {
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "ArtistRequest": {
+                "title": "ArtistRequest",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Eminem"
+                    }
+                },
+                "type": "object"
+            },
+            "SongRequest": {
+                "title": "SongRequest",
+                "required": [
+                    "title"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Godzilla"
+                    }
+                },
+                "type": "object"
+            },
+            "Album": {
+                "title": "Album",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Rapgod"
+                    },
+                    "artist_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "release_year": {
+                        "type": "integer",
+                        "example": "2007"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-21T11:28:35Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-21T11:28:35Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Artist": {
+                "title": "Artist",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Eminem"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-21T11:28:35Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-21T11:28:35Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Song": {
+                "title": "Song",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Godzilla"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-21T11:28:35Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-21T11:28:35Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Album",
+            "description": "CRUD"
+        },
+        {
+            "name": "AlbumSong"
+        },
+        {
+            "name": "Artist",
+            "description": "CRUD"
+        },
+        {
+            "name": "Song",
+            "description": "CRUD"
+        }
+    ]
+}

@@ -5,12 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AlbumRequest;
 use App\Http\Resources\AlbumResource;
 use App\Models\Album;
-use Illuminate\Http\Request;
 
+/**
+ * @OA\Tag(
+ *     name="Album",
+ *     description="CRUD"
+ * )
+ */
 class AlbumController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/albums",
+     *     summary="Display all albums",
+     *     tags={"Album"},
+     *     @OA\Response(
+     *          response=200,
+     *          description="All albums are shown",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/Album")
+     *          )
+     *      ),
+     * )
      */
     public function index()
     {
@@ -19,7 +36,17 @@ class AlbumController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/albums",
+     *     summary="Add album",
+     *     tags={"Album"},
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/AlbumRequest")),
+     *     @OA\Response(
+     *         response=201,
+     *         description="The album has been added",
+     *         @OA\JsonContent(ref="#/components/schemas/Album")
+     *     ),
+     * )
      */
     public function store(AlbumRequest $request)
     {
@@ -29,7 +56,17 @@ class AlbumController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/albums/{album}",
+     *     summary="Get album",
+     *     tags={"Album"},
+     *     @OA\Parameter(name="album", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(
+     *          response=200,
+     *          description="The album was shown",
+     *          @OA\JsonContent(ref="#/components/schemas/Album")
+     *     ),
+     * )
      */
     public function show(Album $album)
     {
@@ -37,7 +74,18 @@ class AlbumController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/albums/{album}",
+     *     summary="Update album",
+     *     tags={"Album"},
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/AlbumRequest")),
+     *     @OA\Parameter(name="album", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(
+     *          response="200",
+     *          description="The artist has been updated",
+     *          @OA\JsonContent(ref="#/components/schemas/Album")
+     *     )
+     * )
      */
     public function update(AlbumRequest $request, Album $album)
     {
@@ -47,7 +95,13 @@ class AlbumController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/albums/{album}",
+     *     summary="Remove album",
+     *     tags={"Album"},
+     *     @OA\Parameter(name="album", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response="204", description="The artist has been removed")
+     * )
      */
     public function destroy(Album $album)
     {
