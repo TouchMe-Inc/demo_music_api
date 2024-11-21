@@ -9,4 +9,9 @@ class AlbumSong extends Pivot
     protected $table = 'album_songs';
 
     protected $fillable = ['album_id', 'song_id', 'track_number'];
+
+    public function song()
+    {
+        return $this->belongsTo(Song::class);
+    }
 }
