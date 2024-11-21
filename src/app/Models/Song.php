@@ -10,6 +10,8 @@ class Song extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title'];
+
     public function albums(): BelongsToMany
     {
         return $this->belongsToMany(Album::class)->withPivot('track_number');
